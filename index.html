@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       background-color: #111;
@@ -26,11 +26,30 @@
       font-size: 0.9rem;
       margin-top: 0.5rem;
     }
+    .button {
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #6dcff4;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+    .button:hover {
+      background-color: #4ebbdc;
+    }
   </style>
 </head>
 <body>
   <h1>此網域為 HsuDDfps 所有</h1>
   <div class="timestamp" id="timestamp"></div>
+
+  <a class="button" href="https://status.hsuddfps.com/" target="_blank">
+    查看麥塊伺服器狀態
+  </a>
 
   <script>
     function updateTimestamp() {
@@ -41,10 +60,13 @@
       const hh = String(now.getHours()).padStart(2, '0');
       const min = String(now.getMinutes()).padStart(2, '0');
       const ss = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('timestamp').textContent = `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+      document.getElementById('timestamp').textContent =
+        `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
     }
 
+    // 初始呼叫一次，之後每秒更新
     updateTimestamp();
+    setInterval(updateTimestamp, 1000);
   </script>
 </body>
 </html>
