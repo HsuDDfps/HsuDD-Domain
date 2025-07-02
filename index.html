@@ -22,13 +22,24 @@
       font-size: 2rem;
       margin: 0;
     }
+    .subtitle {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      color: #fff;
+    }
     .timestamp {
       color: #888;
       font-size: 0.9rem;
       margin-top: 0.5rem;
     }
-    .button {
+    .button-container {
       margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .button {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
       color: #fff;
@@ -42,15 +53,28 @@
     .button:hover {
       background-color: #4ebbdc;
     }
+    .notification {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #8f8;
+      display: none;
+    }
   </style>
 </head>
 <body>
   <h1>此網域為 HsuDDfps 所有</h1>
+  <div class="subtitle">歡迎有DNS掛載需求與我聯絡！</div>
   <div class="timestamp" id="timestamp"></div>
 
-  <a class="button" href="https://status.hsuddfps.com/" target="_blank">
-    小徐麥塊伺服器連線狀態查詢
-  </a>
+  <div class="button-container">
+    <button class="button" onclick="copyDiscord()">Add me on Discord</button>
+    <a class="button" href="https://status.hsuddfps.com/" target="_blank">
+      小徐麥塊伺服器連線狀態查詢
+    </a>
+  </div>
+  <div class="notification" id="notification">
+    已複製 HsuDDfps 的 Discord ID，請前往 Discord 加為好友！
+  </div>
 
   <script>
     function updateTimestamp() {
@@ -65,7 +89,17 @@
         `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
     }
 
-    // 初始呼叫一次，之後每秒更新
+    function copyDiscord() {
+      const discordId = 'hsudd_fps';
+      navigator.clipboard.writeText(discordId).then(() => {
+        const notice = document.getElementById('notification');
+        notice.style.display = 'block';
+        setTimeout(() => {
+          notice.style.display = 'none';
+        }, 3000);
+      });
+    }
+
     updateTimestamp();
     setInterval(updateTimestamp, 1000);
   </script>
